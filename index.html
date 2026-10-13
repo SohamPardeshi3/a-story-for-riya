@@ -3,282 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>For Riya: a story that's still being written</title>
-<style>
-:root{--ink:#2B3350;--blush:#F4B9B2;--butter:#F7DA8E;--sage:#A8C5A3;--mist:#E8EFF5;--paper:#FFFBF8}
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:#141a33}
-body{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;color:var(--ink);-webkit-font-smoothing:antialiased}
-.stage{position:relative;height:100vh;height:100svh;overflow:hidden}
-.layer{position:absolute;inset:0}
-#night{background:linear-gradient(#141a33,#2b3560 68%,#4a4a7c);z-index:1}
-#dawn{background:linear-gradient(#7fa3c9,#f2c4b8 70%,#f9e0b0);opacity:0;z-index:1}
-#day{background:linear-gradient(#9fd0ea,#dff0f2 75%,#fbeecb);opacity:0;z-index:1}
-#gold{background:linear-gradient(#f3a98f,#f7cf8a 58%,#fbe9b8);opacity:0;z-index:1}
-.stars{z-index:2}
-.star{position:absolute;border-radius:50%;background:#fff;animation:tw 3.5s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
-#moon{position:absolute;z-index:2;left:14%;top:11%;width:15vmin;height:15vmin;border-radius:50%;background:#fdf3d6;box-shadow:0 0 70px 14px rgba(253,243,214,.32)}
-.cloud{position:absolute;z-index:3}
-.hill{position:absolute;left:0;right:0;bottom:0;z-index:4;line-height:0}
-.hill svg{width:100%;height:100%;display:block}
-#hillBack{height:26vh}
-#hillFront{height:20vh;z-index:5}
-.flower{position:absolute;z-index:5;left:6vw;bottom:8vh;height:min(46vh,62vw);width:auto;overflow:visible}
-#balloon{position:absolute;z-index:6;left:50%;bottom:0;width:clamp(120px,34vmin,300px);pointer-events:none}
-#balloon svg{display:block;width:100%;animation:bob 5s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
-.petal{position:absolute;z-index:7;top:0;width:14px;height:20px;background:var(--blush);border-radius:100% 0 100% 0;opacity:0}
-#orbit{position:absolute;z-index:8;left:50%;top:36%;width:0;height:0}
-.num{position:absolute;left:0;top:0;margin:-.6em 0 0 -.4em;font-size:clamp(1.6rem,6vw,2.6rem);font-style:italic;color:var(--ink);opacity:0}
-#orbitHub{position:absolute;z-index:8;left:50%;top:36%;transform:translate(-50%,-50%);text-align:center;opacity:0;font-style:italic;font-size:clamp(.9rem,3vw,1.15rem);line-height:1.2;max-width:22vmin}
-#plate{position:absolute;z-index:8;left:50%;top:36%;width:36vmin;height:36vmin;margin:-18vmin 0 0 -18vmin;border-radius:50%;background:#fff;box-shadow:0 0 0 2.2vmin #f3ece4,0 20px 40px rgba(43,51,80,.25);display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:1vmin;padding:4vmin;opacity:0}
-.food{font-size:10vmin;line-height:1}
-.scene{position:absolute;z-index:10;left:0;right:0;bottom:6vh;display:flex;justify-content:center;padding:0 5vw;pointer-events:none;opacity:0;visibility:hidden}
-.scene.mid{top:0;bottom:0;align-items:center}
-.scene.top{top:7vh;bottom:auto}
-.card{background:var(--paper);border-radius:16px;padding:22px 26px;max-width:34rem;width:100%;box-shadow:0 18px 50px rgba(20,26,51,.28)}
-h2{font-size:clamp(1.45rem,4.6vw,2.1rem);font-weight:500;font-style:italic;line-height:1.2;margin-bottom:.45em}
-.card p{font-size:clamp(1rem,2.7vw,1.15rem);line-height:1.6}
-.cover{top:0;bottom:0;align-items:center;text-align:center;color:var(--mist)}
-.cover h1{font-size:clamp(2.1rem,8.2vw,4.4rem);font-weight:500;font-style:italic;line-height:1.08;max-width:14em;margin:0 auto .5em}
-.cover p{font-size:clamp(1rem,3vw,1.2rem);opacity:.85;line-height:1.6}
-.cue{display:block;margin:2.2rem auto 0;width:1px;height:48px;background:linear-gradient(var(--mist),transparent);animation:cue 2.2s ease-in-out infinite;transform-origin:top}
-@keyframes cue{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-.days{display:inline-block;margin-top:.9em;padding:.35em .9em;border-radius:99px;background:var(--butter);font-size:clamp(.95rem,2.6vw,1.05rem)}
-.ledger h2{margin-bottom:.2em}
-.ledger .sub{font-size:.95rem;opacity:.7;margin-bottom:.9em;font-style:italic}
-.ledger h3{font-size:1rem;font-weight:600;margin:.9em 0 .3em;color:#5f7f64}
-.ledger h3.l{color:#b5675f}
-.row{font-size:clamp(.98rem,2.6vw,1.08rem);line-height:1.5;padding:.38em 0;border-bottom:1px dashed #e6ddd5}
-.total{font-size:clamp(1.05rem,2.9vw,1.2rem);margin-top:.8em;font-style:italic}
-.big{font-size:clamp(2.1rem,8vw,4rem);font-weight:500;font-style:italic;line-height:1.05;text-align:center;color:var(--ink)}
-.fin{text-align:center;max-width:36rem}
-.fin p{font-size:clamp(1rem,2.9vw,1.2rem);line-height:1.55;margin-top:.7em}
-.blank{display:inline-block;border-bottom:2px solid var(--ink);min-width:9em;font-style:italic;opacity:.75;padding:0 .4em}
-#bar{position:fixed;z-index:30;left:0;top:0;height:3px;width:100%;background:var(--blush);transform:scaleX(0);transform-origin:left}
-@media (prefers-reduced-motion:reduce){.star,#balloon svg,.cue{animation:none}}
-</style>
+<meta name="theme-color" content="#080b24">
+<title>For Riya</title>
+<meta name="description" content="A very early letter, from someone who isn't here yet.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="sky"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="moon" aria-hidden="true"></div>
+<div id="sun" aria-hidden="true"><div id="rays"></div></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="hill" id="hl1" aria-hidden="true"><svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0 120C160 40 300 70 470 110C650 152 780 40 960 52C1130 64 1280 120 1440 70V300H0Z"/></svg></div>
+<div class="hill" id="hl2" aria-hidden="true"><svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0 90C200 150 360 40 560 80C760 120 900 170 1100 100C1250 50 1360 70 1440 96V300H0Z"/></svg></div>
+<div class="hill" id="hl3" aria-hidden="true"><svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0 130C220 70 400 150 640 120C860 92 1060 40 1240 90C1340 118 1400 110 1440 100V300H0Z"/></svg></div>
 <div id="bar"></div>
 
-<svg width="0" height="0" style="position:absolute"><symbol id="cl" viewBox="0 0 200 80"><g fill="#fff"><circle cx="60" cy="50" r="28"/><circle cx="100" cy="38" r="34"/><circle cx="145" cy="50" r="26"/><rect x="40" y="50" width="130" height="28" rx="14"/></g></symbol></svg>
+<main>
+  <section id="intro">
+    <div class="intro-in">
+      <p class="kick">For Riya</p>
+      <h1><span class="ln"><span>A very early letter</span></span><span class="ln"><span><em>from someone who isn't here yet.</em></span></span></h1>
+      <p class="cue">Scroll slowly. This one moves with you.</p>
+    </div>
+  </section>
 
-<main class="stage">
-  <div class="layer" id="night"></div>
-  <div class="layer" id="dawn"></div>
-  <div class="layer" id="day"></div>
-  <div class="layer" id="gold"></div>
-  <div class="layer stars" id="stars"></div>
-  <div id="moon"></div>
+  <section id="night">
+    <div class="stmt"><p class="huge" data-split>Hi. It's me.</p><p class="aside">(The little light following your finger is me, by the way.)</p></div>
+    <div class="stmt"><p data-split>It's a bit cramped in here, but I've been told it's lovely out there.</p></div>
+    <div class="stmt"><p data-split>I've been keeping notes. Measured, as is tradition in this family, in food.</p></div>
+  </section>
 
-  <svg class="cloud" viewBox="0 0 200 80" style="top:8%;left:6%;width:30vmin" data-s=".8"><use href="#cl"/></svg>
-  <svg class="cloud" viewBox="0 0 200 80" style="top:28%;left:62%;width:38vmin" data-s="1"><use href="#cl"/></svg>
-  <svg class="cloud" viewBox="0 0 200 80" style="top:48%;left:10%;width:34vmin" data-s="1.2"><use href="#cl"/></svg>
-  <svg class="cloud" viewBox="0 0 200 80" style="top:66%;left:56%;width:30vmin" data-s="1.4"><use href="#cl"/></svg>
-  <svg class="cloud" viewBox="0 0 200 80" style="top:84%;left:24%;width:42vmin" data-s="1.1"><use href="#cl"/></svg>
+  <section id="weeks" aria-label="Week by week">
+    <div class="wk-top"><small>week</small><span id="wkNum">4</span></div>
+    <div class="fruits" id="fruits"></div>
+    <div class="caps" id="caps"></div>
+    <div class="rule"><span id="wkBar"></span></div>
+  </section>
 
-  <div class="hill" id="hillBack"><svg viewBox="0 0 1000 200" preserveAspectRatio="none"><path d="M0 90C170 20 330 40 500 80S830 130 1000 50V200H0Z" fill="#B9D2B2"/></svg></div>
-  <div class="hill" id="hillFront"><svg viewBox="0 0 1000 200" preserveAspectRatio="none"><path d="M0 100C200 60 380 120 560 90S860 40 1000 90V200H0Z" fill="#9CBF98"/></svg></div>
+  <section id="lab">
+    <div class="sec">
+      <h2 data-split>For the department of numbers</h2>
+      <p class="sub">Riya, a name will be chosen and then, we all know, calculated. So here is a calculator for the shortlist. If my method is off, you'd be the one to say.</p>
+      <div class="lab-card glass">
+        <div class="fields">
+          <label>A name to try<input id="nm" type="text" placeholder="Type any name" autocomplete="off" spellcheck="false"></label>
+          <label>A birth date, if you like<input id="dob" type="date"></label>
+        </div>
+        <div class="out" id="out"></div>
+        <div class="keep" id="keep"></div>
+        <p class="fine">Pythagorean method. Everything is saved on this device only, so try as many as you want.</p>
+      </div>
+    </div>
+  </section>
 
-  <svg class="flower" viewBox="0 0 200 300">
-    <path id="stem" d="M100 300C94 240 108 170 100 96" stroke="#6F9A73" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path class="leaf" d="M99 214C70 204 55 184 52 172C75 174 95 190 99 214Z" fill="#7FAE84"/>
-    <path class="leaf" d="M101 180C128 170 143 152 146 140C124 142 105 156 101 180Z" fill="#7FAE84"/>
-    <g id="bloomPos"><g id="bloom"></g></g>
-  </svg>
+  <section id="audit">
+    <div class="sec">
+      <h2 data-split>The books, as of December</h2>
+      <p class="sub">Statement of changes, prepared by someone with no accounting qualifications whatsoever.</p>
+      <div class="ledger" id="ledger"></div>
+      <div class="stamp" id="stamp"><small>Auditor's opinion</small><b>Unqualified.</b><span>Which, to the non-accountants, is the best result there is. A clean, true and fair addition to the family.</span></div>
+    </div>
+  </section>
 
-  <div id="balloon">
-    <svg viewBox="0 0 200 264">
-      <defs><clipPath id="env"><path d="M100 8C18 8 2 112 70 192H130C198 112 182 8 100 8Z"/></clipPath></defs>
-      <g clip-path="url(#env)">
-        <rect width="200" height="200" fill="#F4B9B2"/>
-        <ellipse cx="100" cy="100" rx="62" ry="100" fill="#F7DA8E"/>
-        <ellipse cx="100" cy="100" rx="30" ry="100" fill="#A8C5A3"/>
-      </g>
-      <path d="M100 148L82 130C70 115 86 104 100 118C114 104 130 115 118 130Z" fill="#fff" opacity=".92"/>
-      <path d="M70 192L88 232M130 192L112 232" stroke="#8a6a4a" stroke-width="2"/>
-      <g id="baby" opacity="0">
-        <path d="M84 240c0-18 7-26 16-26s16 8 16 26z" fill="#F7DA8E"/>
-        <circle cx="100" cy="221" r="11" fill="#F6D3BD"/>
-        <circle cx="96" cy="221" r="1.3" fill="#2B3350"/><circle cx="104" cy="221" r="1.3" fill="#2B3350"/>
-        <path d="M96.5 225q3.5 2.5 7 0" stroke="#2B3350" stroke-width="1.2" fill="none"/>
-        <path d="M89 217q11-13 22 0q-11-5-22 0z" fill="#fff"/>
-      </g>
-      <rect x="82" y="232" width="36" height="28" rx="6" fill="#C98F5A"/>
-      <path d="M82 244H118M82 252H118" stroke="#a87440" stroke-width="1.5"/>
-    </svg>
-  </div>
+  <section id="letter">
+    <div class="paper" id="paper">
+      <p data-split>Riya,</p>
+      <p data-split>You've helped every one of us with something. Numbers, decisions, whatever we couldn't sort out ourselves. Usually while bullying us a little. I always knew which part was the love.</p>
+      <p data-split>Now someone gets you as their person from day one. They're very lucky. So are we.</p>
+      <p data-split>Whatever you need, whenever you need it, I'm around.</p>
+      <p class="sig" data-split>Sahil</p>
+      <p class="ps" data-split>P.S. Please wait until the baby is at least two before you start bullying them. I need the head start.</p>
+    </div>
+  </section>
 
-  <div id="orbit"></div>
-  <div id="orbitHub">your date<br>goes here</div>
-  <div id="plate"><span class="food">🍛</span><span class="food">🥭</span><span class="food">🍰</span><span class="food">🍪</span></div>
-
-  <!-- scenes -->
-  <section class="scene cover" id="s0"><div>
-    <h1>A story about someone who hasn't arrived yet</h1>
-    <p>Made for Riya. Scroll slowly, the story only moves when you do.</p>
-    <span class="cue"></span>
-  </div></section>
-
-  <section class="scene" id="s1"><div class="card">
-    <h2>Once upon a time</h2>
-    <p>There was a family that already had plenty of love. About a year ago, Riya started a family of her own, and it turned out there was still room for one more.</p>
-  </div></section>
-
-  <section class="scene" id="s2"><div class="card">
-    <h2>Someone small is on the way</h2>
-    <p>High above the clouds, a very small passenger is packing for the trip. Nobody knows what's in the basket. We suspect one tiny hat and a lot of opinions.</p>
-  </div></section>
-
-  <section class="scene" id="s3"><div class="card">
-    <h2>Down below, something started to grow</h2>
-    <p>Quietly, like all the best things do. The whole family has been watching it, one slow day at a time.</p>
-    <span class="days" id="daysChip"></span>
-  </div></section>
-
-  <section class="scene mid" id="s4"><div class="card ledger">
-    <h2>Riya's account, audited by her family</h2>
-    <p class="sub">Reviewed carefully. No errors found, naturally.</p>
-    <h3>Assets</h3>
-    <div class="row">A CA who can spot the one wrong number in a thousand</div>
-    <div class="row">A manager who runs everything and still looks out for everyone</div>
-    <div class="row">The smartest person in the family, by unanimous vote</div>
-    <h3 class="l">Liabilities</h3>
-    <div class="row">A flair for drama (classified as a strength)</div>
-    <div class="row">Bullying her little cousin, always followed by looking out for him</div>
-    <div class="total" id="total">Total: one very lucky baby.</div>
-  </div></section>
-
-  <section class="scene top" id="s5"><div class="card">
-    <h2>The numbers have a say</h2>
-    <p>Riya believes in numerology, and she's helped half the family with it. So this page is left open on purpose. On the day, the date goes in, and she'll read what it means before any of us can.</p>
-  </div></section>
-
-  <section class="scene" id="s6"><div class="card">
-    <h2>A few notes for the baby</h2>
-    <p>Your mother loves food. She will also tell you she isn't hungry. Both are true. She'll order for the whole table and eat three bites, and those three bites will be the best ones. Don't argue, just eat what's offered.</p>
-  </div></section>
-
-  <section class="scene top" id="s7"><div class="fin">
-    <div class="big">Welcome, little one.</div>
-    <p>A basket landed softly in December. Name: <span class="blank">written on the day</span></p>
-    <p>Love, Sahil, and everyone who can't wait to meet you.</p>
-  </div></section>
+  <section id="dawn">
+    <p class="dline" id="d1">And then, one morning in December,</p>
+    <p class="dline" id="d2"><em>the long night ends.</em></p>
+    <svg class="welcome" viewBox="0 0 640 300" aria-label="Welcome, little one"><text class="wt" x="320" y="125" text-anchor="middle">Welcome,</text><text class="wt" x="320" y="268" text-anchor="middle">little one</text></svg>
+    <div class="dend" id="dend">
+      <p>Name: <span class="blank">to be decided, after consulting the numbers</span></p>
+      <p>Keep this page. One day, show them: "Look. This is how much we were already waiting for you."</p>
+      <button class="wishbtn" id="wish" type="button">Make a wish for the baby</button>
+      <span id="lcount" aria-live="polite"></span>
+      <p class="signoff">Made with love by Sahil</p>
+    </div>
+  </section>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-
-// stars
-const starsEl=$("#stars");
-for(let i=0;i<90;i++){const d=document.createElement("div");d.className="star";const sz=1+Math.random()*2.2;
-  d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*72}%;width:${sz}px;height:${sz}px;animation-delay:${(Math.random()*3.5).toFixed(2)}s`;
-  starsEl.appendChild(d);}
-
-// flower bloom
-let petals="";for(let a=0;a<360;a+=45){petals+=`<ellipse cx="100" cy="62" rx="13" ry="26" fill="#F4B9B2" transform="rotate(${a} 100 84)"/>`;}
-$("#bloom").innerHTML=petals+`<circle cx="100" cy="84" r="13" fill="#F7DA8E"/>`;
-
-// numerology orbit
-const orbit=$("#orbit"), R=Math.max(72,Math.min(innerWidth,innerHeight)*.17);
-for(let n=1;n<=9;n++){const s=document.createElement("span");s.className="num";s.textContent=n;orbit.appendChild(s);}
-
-// falling petals
-for(let i=0;i<26;i++){const p=document.createElement("span");p.className="petal";p.style.left=(Math.random()*100)+"%";
-  p.style.background=["#F4B9B2","#F7DA8E","#fff"][i%3];$(".stage").appendChild(p);}
-
-// countdown to December
-const dec=new Date(2026,11,1), left=Math.ceil((dec-new Date())/864e5);
-$("#daysChip").textContent=left>0?`${left} days until December`:"December is here";
-
-// initial states
-gsap.set("#s0",{autoAlpha:1});
-gsap.set("#balloon",{xPercent:-50,y:"-88vh",scale:.28,autoAlpha:0,transformOrigin:"50% 100%"});
-gsap.set(["#hillBack","#hillFront"],{yPercent:100});
-gsap.set(".cloud",{autoAlpha:0});
-gsap.set("#stem",{scaleY:0,svgOrigin:"100 300"});
-gsap.set(".leaf",{scale:0,svgOrigin:"100 200"});
-gsap.set("#bloomPos",{y:210,autoAlpha:0});
-gsap.set("#bloom",{scale:0,rotation:-80,svgOrigin:"100 84"});
-gsap.set(".row,.total",{autoAlpha:0,x:-18});
-gsap.set(".food",{autoAlpha:0,y:-220});
-
-const tl=gsap.timeline({
-  defaults:{ease:"none"},
-  scrollTrigger:{trigger:".stage",start:"top top",end:"+=9500",pin:true,scrub:1.2,anticipatePin:1,
-    onUpdate:s=>gsap.set("#bar",{scaleX:s.progress})}
-});
-
-function scene(sel,s,e){
-  tl.fromTo(sel,{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:1.5,ease:"power2.out"},s)
-    .to(sel,{autoAlpha:0,y:-30,duration:1.5,ease:"power2.in"},e-1.5);
-}
-tl.to("#s0",{autoAlpha:0,y:-40,duration:1.6,ease:"power2.in"},7);
-scene("#s1",10.5,20);scene("#s2",20.5,30);scene("#s3",30.5,40);scene("#s4",40.5,50);scene("#s5",50.5,60);scene("#s6",60.5,70);
-tl.fromTo("#s7",{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:2,ease:"power2.out"},73);
-
-// skies: night -> dawn -> day -> gold
-tl.to("#dawn",{opacity:1,duration:10},12)
-  .to("#day",{opacity:1,duration:8},26)
-  .to("#gold",{opacity:1,duration:6},69)
-  .to(["#stars","#moon"],{opacity:0,duration:8},14)
-  .to("#moon",{y:"22vh",duration:8},14);
-
-// clouds streaming past
-$$(".cloud").forEach(c=>{const sp=+c.dataset.s;
-  tl.to(c,{autoAlpha:.88,duration:4},12)
-    .fromTo(c,{y:"35vh"},{y:`-${120*sp}vh`,duration:24},10)
-    .to(c,{autoAlpha:0,duration:3},32);});
-
-// balloon journey
-tl.to("#balloon",{autoAlpha:1,duration:2},10.5)
-  .to("#balloon",{y:"-60vh",scale:.5,x:"-6vw",duration:9.5},11)
-  .to("#balloon",{y:"-52vh",scale:.72,x:"5vw",duration:10},20.5)
-  .to("#balloon",{y:"-80vh",scale:.3,x:"30vw",duration:8},31)
-  .to("#balloon",{y:"-74vh",scale:.38,x:"28vw",duration:30},40)
-  .to("#balloon",{y:"-15vh",scale:1.05,x:0,duration:8.5,ease:"power1.inOut"},70);
-
-// hills and flower
-tl.to("#hillBack",{yPercent:0,duration:6},27)
-  .to("#hillFront",{yPercent:0,duration:6},29)
-  .to("#stem",{scaleY:1,duration:4,ease:"power1.out"},31)
-  .to("#bloomPos",{autoAlpha:1,y:0,duration:4,ease:"power1.out"},31)
-  .to(".leaf",{scale:1,duration:2,stagger:.8,ease:"back.out(1.7)"},33)
-  .to("#bloom",{scale:1,rotation:0,duration:3,ease:"back.out(1.6)"},34.5);
-
-// ledger rows
-tl.to(".row",{autoAlpha:1,x:0,duration:1,stagger:1.1},42)
-  .to("#total",{autoAlpha:1,x:0,duration:1},47.4);
-
-// numerology orbit
-$$(".num").forEach((n,i)=>{
-  const a=(i/9)*Math.PI*2-Math.PI/2;
-  tl.fromTo(n,{x:(Math.random()-.5)*innerWidth*.9,y:(Math.random()-.5)*innerHeight*.6,autoAlpha:0,scale:.4},
-    {x:Math.cos(a)*R,y:Math.sin(a)*R,autoAlpha:1,scale:1,duration:3,ease:"power2.out"},51+i*.25);
-});
-tl.to("#orbit",{rotation:140,duration:9},51)
-  .to(".num",{rotation:-140,duration:9},51)
-  .to("#orbitHub",{opacity:1,duration:2},55)
-  .to(["#orbit","#orbitHub"],{autoAlpha:0,duration:1.3},58.7);
-
-// food
-tl.to("#plate",{opacity:1,duration:1.2},60.8)
-  .to(".food",{autoAlpha:1,y:0,duration:1.3,stagger:1,ease:"bounce.out"},61.6)
-  .to("#plate",{autoAlpha:0,y:-20,duration:1.3},68.7);
-
-// finale
-tl.to("#baby",{opacity:1,duration:1.5},77);
-$$(".petal").forEach(p=>{
-  tl.fromTo(p,{y:"-10vh",x:0,rotation:0,autoAlpha:0},
-    {y:"112vh",x:(Math.random()-.5)*160,rotation:(Math.random()-.5)*720,autoAlpha:.9,duration:6+Math.random()*2.5},71+Math.random()*4);
-});
-tl.to({},{duration:3},80);
-</script>
-<noscript>This story needs JavaScript to turn its pages.</noscript>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/ScrollTrigger.min.js"></script>
+<script src="assets/lenis.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
